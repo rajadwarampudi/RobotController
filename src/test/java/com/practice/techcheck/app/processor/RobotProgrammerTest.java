@@ -25,10 +25,22 @@ public class RobotProgrammerTest {
     }
 
     @Test
-    public void TestGenerateReportThrowsException() {
-        RobotProgrammer robotProgrammer = new RobotProgrammer(new Field(1, 1));
+    public void TestGenerateReportThrowsExceptionOnOuterBounds() {
+        RobotProgrammer robotProgrammer = new RobotProgrammer(new Field(10, 10));
         Throwable exception = assertThrows(Exception.class, () -> robotProgrammer.generateReport(
-                new RobotPosition(0, 0 ), 'N', "FFFFFFF"));
-        assertEquals("Exception", exception.getMessage());
+                new RobotPosition(0, 0), 'S', "FFFFFFFFFFFFFFFF"));
+        assertEquals("Robot moved out of the field", exception.getMessage());
+
+        exception = assertThrows(Exception.class, () -> robotProgrammer.generateReport(
+                new RobotPosition(0, 0), 'N', "FFFFFFFFFFFFFFFF"));
+        assertEquals("Robot moved out of the field", exception.getMessage());
+
+        exception = assertThrows(Exception.class, () -> robotProgrammer.generateReport(
+                new RobotPosition(5, 6), 'E', "FFFFFFFFFFFFFFFF"));
+        assertEquals("Robot moved out of the field", exception.getMessage());
+
+        exception = assertThrows(Exception.class, () -> robotProgrammer.generateReport(
+                new RobotPosition(4, 3), 'W', "FFFFFFFFFFFFFFFF"));
+        assertEquals("Robot moved out of the field", exception.getMessage());
     }
 }

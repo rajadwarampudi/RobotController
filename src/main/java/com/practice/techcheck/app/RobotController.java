@@ -17,17 +17,13 @@ public class RobotController {
         int yPosition = scanner.nextInt();
         char initialOrientation = scanner.next().charAt(0);
         scanner.nextLine();
-
-        System.out.println("xPosition " + xPosition + " yPosition: " + yPosition + " initialOrientation: " + initialOrientation);
         String navigationCommands = scanner.nextLine();
-        System.out.println(navigationCommands);
+        scanner.close();
 
         RobotPosition initialPosition = new RobotPosition(xPosition, yPosition);
         Field field = new Field(width, depth);
         RobotProgrammer robotProgrammer = new RobotProgrammer(field);
 
         robotProgrammer.printReport(initialPosition, initialOrientation, navigationCommands);
-
-        scanner.close();
     }
 }
