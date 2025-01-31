@@ -19,15 +19,11 @@ public class RobotController {
         scanner.nextLine();
 
         System.out.println("xPosition " + xPosition + " yPosition: " + yPosition + " initialOrientation: " + initialOrientation);
-
         String navigationCommands = scanner.nextLine();
-
         System.out.println(navigationCommands);
 
         RobotPosition initialPosition = new RobotPosition(xPosition, yPosition);
-
         Field field = new Field(width, depth);
-
         RobotProgrammer robotProgrammer = new RobotProgrammer(field);
 
         robotProgrammer.printReport(initialPosition, initialOrientation, navigationCommands);

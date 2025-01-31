@@ -59,7 +59,7 @@ public class RobotProgrammer {
         if (!field.isOutOfTheField(nextPosition)) {
             return  nextPosition;
         } else {
-            throw new Exception();
+            throw new Exception("Exception");
         }
     }
 
