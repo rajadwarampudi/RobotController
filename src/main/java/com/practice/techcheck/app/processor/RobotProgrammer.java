@@ -1,21 +1,21 @@
 package com.practice.techcheck.app.processor;
 
 import com.practice.techcheck.app.exception.RobotOutOfBoundsException;
-import com.practice.techcheck.app.model.Field;
+import com.practice.techcheck.app.model.Floor;
 import com.practice.techcheck.app.model.Report;
 import com.practice.techcheck.app.model.RobotPosition;
 
 public class RobotProgrammer {
 
-    private final Field field;
+    private final Floor floor;
 
-    public RobotProgrammer(Field field) {
-        this.field = field;
+    public RobotProgrammer(Floor floor) {
+        this.floor = floor;
     }
 
     /**
      * This method prints the generated report in the format "Report: xPosition, yPosition, orientation"
-     * It exits the application with an error status if the input is invalid or the robot has moved out of the field
+     * It exits the application with an error status if the input is invalid or the robot has moved out of the floor
      * @param initialPosition
      * @param initialOrientation
      * @param navigationCommands
@@ -31,9 +31,9 @@ public class RobotProgrammer {
     }
 
     /**
-     * This method navigates through the Field from the current position and orientation using the given navigation commands,
+     * This method navigates through the Floor from the current position and orientation using the given navigation commands,
      * creates the report with final position and orientation and returns it.
-     * It throws exception in case of invalid input or if the robot has moved out of the field
+     * It throws exception in case of invalid input or if the robot has moved out of the floor
      * @param currentPosition
      * @param currentOrientation
      * @param navigationCommands
@@ -73,10 +73,10 @@ public class RobotProgrammer {
 
         RobotPosition nextPosition = new RobotPosition(nextXPosition, nextYPosition);
 
-        if (!field.isOutOfTheField(nextPosition)) {
+        if (!floor.isOutOfTheFloor(nextPosition)) {
             return  nextPosition;
         } else {
-            throw new RobotOutOfBoundsException("Robot moved out of the field");
+            throw new RobotOutOfBoundsException("Robot moved out of the floor");
         }
     }
 

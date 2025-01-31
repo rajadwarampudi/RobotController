@@ -48,6 +48,7 @@ public class InputValidator {
 
     public String readValidNavigationCommand() throws InvalidInputException {
         try {
+            scanner.nextLine();
             String navigationCommands = scanner.nextLine();
             if (isNotValid(navigationCommands)) {
                 throw new InvalidInputException("Navigation commands contains invalid letters: " + navigationCommands);

@@ -1,7 +1,7 @@
 package com.practice.techcheck.app;
 
 import com.practice.techcheck.app.input.InputValidator;
-import com.practice.techcheck.app.model.Field;
+import com.practice.techcheck.app.model.Floor;
 import com.practice.techcheck.app.model.RobotPosition;
 import com.practice.techcheck.app.processor.RobotProgrammer;
 
@@ -14,8 +14,8 @@ public class RobotController {
         String navigationCommands = "";
         try {
             InputValidator inputValidator = new InputValidator();
-            width = inputValidator.readValidInt("field width");
-            depth = inputValidator.readValidInt("field depth");
+            width = inputValidator.readValidInt("floor width");
+            depth = inputValidator.readValidInt("floor depth");
             xPosition = inputValidator.readValidInt("Robot's initial xPosition");
             yPosition = inputValidator.readValidInt("Robot's initial yPosition");
             initialOrientation = inputValidator.readValidOrientation();
@@ -28,8 +28,8 @@ public class RobotController {
         
 
         RobotPosition initialPosition = new RobotPosition(xPosition, yPosition);
-        Field field = new Field(width, depth);
-        RobotProgrammer robotProgrammer = new RobotProgrammer(field);
+        Floor floor = new Floor(width, depth);
+        RobotProgrammer robotProgrammer = new RobotProgrammer(floor);
 
         robotProgrammer.printReport(initialPosition, initialOrientation, navigationCommands);
     }
