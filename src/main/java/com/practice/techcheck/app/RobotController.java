@@ -5,7 +5,6 @@ import com.practice.techcheck.app.model.Field;
 import com.practice.techcheck.app.model.RobotPosition;
 import com.practice.techcheck.app.processor.RobotProgrammer;
 
-import java.util.Scanner;
 
 public class RobotController {
     public static void main(String[] args) {
