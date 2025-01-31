@@ -5,15 +5,31 @@ import com.practice.techcheck.app.exception.InvalidInputException;
 import java.util.Scanner;
 
 public class InputValidator {
-    public static int readValidInt(Scanner scanner, String inputName) throws Exception{
+    Scanner scanner;
+
+    public InputValidator() {
+        scanner = new Scanner(System.in);
+
+    }
+
+    public int readValidInt(String inputName) throws Exception{
         try {
-            return scanner.nextInt();
+            int input = scanner.nextInt();
+            if (isNotValid(input)) {
+                throw new InvalidInputException(inputName + ": " + input + " is invalid");
+            }
+            return input;
         } catch (Exception ex) {
+            scanner.close();
             throw new InvalidInputException("Wrong format for the input: " + inputName);
         }
     }
 
-    public static char readValidOrientation(Scanner scanner) throws InvalidInputException {
+    boolean isNotValid(int input) {
+        return input < 0;
+    }
+
+    public char readValidOrientation() throws InvalidInputException {
         try {
             char initialOrientation = scanner.next().charAt(0);
             if (isNotValid(initialOrientation)) {
@@ -21,15 +37,16 @@ public class InputValidator {
             }
             return initialOrientation;
         } catch (Exception ex) {
+            scanner.close();
             throw new InvalidInputException("Wrong format for the initial orientation: " + ex.getMessage());
         }
     }
 
-    private static boolean isNotValid(char initialOrientation) {
+    boolean isNotValid(char initialOrientation) {
         return initialOrientation != 'N' && initialOrientation != 'E' && initialOrientation != 'S' && initialOrientation != 'W';
     }
 
-    public static String readValidNavigationCommand(Scanner scanner) throws InvalidInputException {
+    public String readValidNavigationCommand() throws InvalidInputException {
         try {
             String navigationCommands = scanner.nextLine();
             if (isNotValid(navigationCommands)) {
@@ -37,11 +54,16 @@ public class InputValidator {
             }
             return navigationCommands;
         } catch (Exception ex) {
+            scanner.close();
             throw new InvalidInputException("Navigation command is invalid: " +ex.getMessage());
         }
     }
 
-    private static boolean isNotValid(String navigationCommands) {
+    public void close() {
+        scanner.close();
+    }
+
+    boolean isNotValid(String navigationCommands) {
         if (navigationCommands == null || navigationCommands.isBlank())
         {
             return true;

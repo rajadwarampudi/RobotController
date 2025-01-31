@@ -9,28 +9,23 @@ import java.util.Scanner;
 
 public class RobotController {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
         int width = 0, depth = 0;
         int xPosition = 0, yPosition = 0;
         char initialOrientation = 0;
         String navigationCommands = "";
         try {
-            width = InputValidator.readValidInt(scanner, "field width");
-            depth = InputValidator.readValidInt(scanner, "field depth");
-            xPosition = InputValidator.readValidInt(scanner, "Robot's initial xPosition");
-            yPosition = InputValidator.readValidInt(scanner, "Robot's initial yPosition");
-            initialOrientation = InputValidator.readValidOrientation(scanner);
-            scanner.nextLine();
-            navigationCommands = InputValidator.readValidNavigationCommand(scanner);
+            InputValidator inputValidator = new InputValidator();
+            width = inputValidator.readValidInt("field width");
+            depth = inputValidator.readValidInt("field depth");
+            xPosition = inputValidator.readValidInt("Robot's initial xPosition");
+            yPosition = inputValidator.readValidInt("Robot's initial yPosition");
+            initialOrientation = inputValidator.readValidOrientation();
+            navigationCommands = inputValidator.readValidNavigationCommand();
+            inputValidator.close();
         } catch (Exception e) {
-            scanner.close();
             System.out.println(e.getMessage());
             System.exit(1);
-        } finally {
-            scanner.close();
         }
-
         
 
         RobotPosition initialPosition = new RobotPosition(xPosition, yPosition);
